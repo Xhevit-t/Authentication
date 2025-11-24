@@ -17,7 +17,7 @@ $stmt = db()->prepare($sql);
 $stmt->bindValue(':lim', $limit, PDO::PARAM_INT);
 $stmt->bindValue(':off', $offset, PDO::PARAM_INT);
 $stmt->execute();
-$rows = $stmt->fetchAll(PDO::FETCH_ASSOC); // enforce associative
+$rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
 echo json_encode([
     'meta' => [

@@ -1,13 +1,19 @@
 <?php
 declare(strict_types=1);
 
-ini_set('session.cookie_httponly', '1');
-ini_set('session.use_strict_mode', '1');
-ini_set('session.cookie_samesite', 'Lax');
-//ini_set('session.cookie_secure', '1');
-session_name('ib_auth_sess');
-session_start();
+error_reporting(E_ALL);
+ini_set('display_errors', '1');
+
+session_set_cookie_params([
+    'lifetime' => 0,
+    'path' => '/',
+    'secure' => false,
+    'httponly' => true,
+    'samesite' => 'Lax',
+]);
+
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
 
 define('DB_PATH', __DIR__ . '/../data/app.sqlite');
-$dir = dirname(DB_PATH);
-if (!is_dir($dir)) { mkdir($dir, 0755, true); }
